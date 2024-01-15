@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                       const Positioned(
                         child: MatchesCard(
                           top: 0,
-                          clr: Color.fromRGBO(248, 187, 208, 1),
+                          clr: Color(0xFFFFC7E9),
                           firstTeam: {
                             'logo': 'assets/images/manchester_united.png',
                             'nameFirst': 'MANCHESTER',
@@ -127,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                       Positioned(
                         child: MatchesCard(
                           top: 152.h,
-                          clr: Colors.blue[300]!,
+                          clr: const Color(0xFF489CFF),
                           firstTeam: const {
                             'logo': 'assets/images/crystal_palace.png',
                             'nameFirst': 'CRYSTAL',
@@ -148,11 +148,11 @@ class HomeScreen extends StatelessWidget {
                       Positioned(
                         child: MatchesCard(
                           top: 304.h,
-                          clr: Colors.teal[100]!,
+                          clr: const Color(0xFFC7FFCA),
                           firstTeam: const {
                             'logo': 'assets/images/arsenal.png',
-                            'nameFirst': 'F.C.',
-                            'nameLast': 'ARSENAL'
+                            'nameFirst': 'ARSENAL',
+                            'nameLast': 'F.C.'
                           },
                           secondTeam: const {
                             'logo': 'assets/images/aston_villa.png',
@@ -169,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                       Positioned(
                         child: MatchesCard(
                           top: 456.h,
-                          clr: Colors.amber[200]!,
+                          clr: const Color(0xFFFFC555),
                           firstTeam: const {
                             'logo': 'assets/images/nottingham_forest.png',
                             'nameFirst': 'NOTTINGHAM',
@@ -308,7 +308,7 @@ class MatchesCard extends StatelessWidget {
                                 style: TextStyle(
                                     fontSize: 34.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.grey[600]),
+                                    color: Colors.blueGrey[600]),
                               )
                             ],
                           ),
@@ -337,7 +337,7 @@ class MatchesCard extends StatelessWidget {
                                   style: TextStyle(
                                       fontSize: 20.sp,
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.grey[600],
+                                      color: Colors.blueGrey[600],
                                       height: 0.4),
                                 )
                               ],
@@ -357,7 +357,7 @@ class MatchesCard extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 22.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: isEven ? Colors.black : Colors.grey[600],
+                                        color: isEven ? Colors.black : Colors.blueGrey[600],
                                       ),
                                     ),
                                     Text(
@@ -365,7 +365,7 @@ class MatchesCard extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: 22.sp,
                                         fontWeight: FontWeight.w600,
-                                        color: !isEven ? Colors.black : Colors.grey[600],
+                                        color: !isEven ? Colors.black : Colors.blueGrey[600],
                                         height: 0.4,
                                       ),
                                     )
@@ -386,7 +386,7 @@ class MatchesCard extends StatelessWidget {
                                         fontWeight: FontWeight.w600,
                                         color: !isEven
                                             ? Colors.black
-                                            : Colors.grey[600],
+                                            : Colors.blueGrey[600],
                                       ),
                                     ),
                                     Text(
@@ -397,7 +397,7 @@ class MatchesCard extends StatelessWidget {
                                           height: 0.4,
                                           color: isEven
                                               ? Colors.black
-                                              : Colors.grey[600]),
+                                              : Colors.blueGrey[600]),
                                     )
                                   ],
                                 ),
@@ -414,7 +414,7 @@ class MatchesCard extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 22.sp,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.grey[600],
+                                  color: Colors.blueGrey[600],
                                 ),
                               ),
                             ],
@@ -469,7 +469,7 @@ class TeamLogoContainer extends StatelessWidget {
               width: width,
               height: height,
               color: clr,
-              child: Image.asset(logo),
+              child: Image.asset(logo, fit: BoxFit.fitHeight,),
             ),
           ),
         )
