@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -103,16 +104,16 @@ class HomeScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   child: Stack(
                     children: [
-                      const Positioned(
+                      Positioned(
                         child: MatchesCard(
                           top: 0,
-                          clr: Color(0xFFFFC7E9),
-                          firstTeam: {
+                          clr: const Color(0xFFFFC7E9),
+                          firstTeam: const {
                             'logo': 'assets/images/manchester_united.png',
                             'nameFirst': 'MANCHESTER',
                             'nameLast': 'UNITED'
                           },
-                          secondTeam: {
+                          secondTeam: const {
                             'logo': 'assets/images/chelsea.png',
                             'nameFirst': 'F.C.',
                             'nameLast': 'CHELSEA'
@@ -122,6 +123,7 @@ class HomeScreen extends StatelessWidget {
                           dayHour: '09',
                           daySecond: '30',
                           isEven: true,
+                          onPressed: () => context.go('/details'),
                         ),
                       ),
                       Positioned(
@@ -143,6 +145,7 @@ class HomeScreen extends StatelessWidget {
                           dayHour: '12',
                           daySecond: '00',
                           isEven: false,
+                          onPressed: () => context.go('/details'),
                         ),
                       ),
                       Positioned(
@@ -164,6 +167,7 @@ class HomeScreen extends StatelessWidget {
                           dayHour: '13',
                           daySecond: '00',
                           isEven: true,
+                          onPressed: () => context.go('/details'),
                         ),
                       ),
                       Positioned(
@@ -185,6 +189,7 @@ class HomeScreen extends StatelessWidget {
                           dayHour: '12',
                           daySecond: '30',
                           isEven: false,
+                          onPressed: () => context.go('/details'),
                         ),
                       )
                     ],
@@ -211,6 +216,7 @@ class MatchesCard extends StatelessWidget {
     required this.dayHour,
     required this.daySecond,
     required this.isEven,
+    required this.onPressed,
   });
 
   final double top;
@@ -222,212 +228,222 @@ class MatchesCard extends StatelessWidget {
   final String dayHour;
   final String daySecond;
   final bool isEven;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: top),
-      child: Stack(
-        children: [
-          ClipPath(
-            clipper: CustomTriangleCard(),
-            child: Container(
-              height: 210.h,
-              color: clr.withOpacity(0.4),
-            ),
-          ),
-          Positioned.fill(
-            top: 0,
-            left: 0,
-            child: ClipPath(
-              clipper: CustomPentagonCard(
-                cornerRadius: 20.r,
-                distanceToXAxis: 60.w,
-                distanceToYAxis: 56.h,
-                bezeirYOne: 44.h,
-                bezeirYTwo: 30.h,
-                isCurved: true,
-              ),
+    return GestureDetector(
+      onTap: onPressed,
+      child: Padding(
+        padding: EdgeInsets.only(top: top),
+        child: Stack(
+          children: [
+            ClipPath(
+              clipper: CustomTriangleCard(),
               child: Container(
-                decoration: BoxDecoration(
-                  color: clr,
+                height: 210.h,
+                color: clr.withOpacity(0.4),
+              ),
+            ),
+            Positioned.fill(
+              top: 0,
+              left: 0,
+              child: ClipPath(
+                clipper: CustomPentagonCard(
+                  cornerRadius: 20.r,
+                  distanceToXAxis: 60.w,
+                  distanceToYAxis: 56.h,
+                  bezeirYOne: 44.h,
+                  bezeirYTwo: 30.h,
+                  isCurved: true,
                 ),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(10.r),
-                          child: Row(
-                            children: [
-                              TeamLogoContainer(
-                                pentCard: CustomPentagonCard(
-                                  cornerRadius: 10.r,
-                                  distanceToXAxis: 18.w,
-                                  distanceToYAxis: 16.h,
-                                  isCurved: false,
-                                ),
-                                clr: clr,
-                                logo: firstTeam['logo']!,
-                                height: 56.h,
-                                width: 56.w,
-                              ),
-                              SizedBox(width: 10.w),
-                              TeamLogoContainer(
-                                pentCard: CustomPentagonCard(
-                                  cornerRadius: 10.r,
-                                  distanceToXAxis: 18.w,
-                                  distanceToYAxis: 16.h,
-                                  isCurved: false,
-                                ),
-                                clr: clr,
-                                logo: secondTeam['logo']!,
-                                height: 56.h,
-                                width: 56.w,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 20.h),
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 20.w,
-                          ),
-                          height: 60.h,
-                          child: Row(
-                            children: [
-                              Text(
-                                dayHour,
-                                style: TextStyle(
-                                    fontSize: 34.sp,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                              Text(
-                                ':$daySecond',
-                                style: TextStyle(
-                                    fontSize: 34.sp,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.blueGrey[600]),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(10.r),
-                      child: Column(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: clr,
+                  ),
+                  child: Row(
+                    children: [
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 60.h,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                          Padding(
+                            padding: EdgeInsets.all(10.r),
+                            child: Row(
                               children: [
-                                Text(
-                                  dayDate,
-                                  style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w600),
+                                TeamLogoContainer(
+                                  pentCard: CustomPentagonCard(
+                                    cornerRadius: 10.r,
+                                    distanceToXAxis: 18.w,
+                                    distanceToYAxis: 16.h,
+                                    isCurved: false,
+                                  ),
+                                  clr: clr,
+                                  logo: firstTeam['logo']!,
+                                  height: 56.h,
+                                  width: 56.w,
                                 ),
-                                Text(
-                                  dayMonth,
-                                  style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.blueGrey[600],
-                                      height: 0.4),
-                                )
+                                SizedBox(width: 10.w),
+                                TeamLogoContainer(
+                                  pentCard: CustomPentagonCard(
+                                    cornerRadius: 10.r,
+                                    distanceToXAxis: 18.w,
+                                    distanceToYAxis: 16.h,
+                                    isCurved: false,
+                                  ),
+                                  clr: clr,
+                                  logo: secondTeam['logo']!,
+                                  height: 56.h,
+                                  width: 56.w,
+                                ),
                               ],
                             ),
                           ),
                           SizedBox(height: 20.h),
-                          Row(
-                            children: [
-                              SizedBox(
-                                height: 60.h,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      firstTeam['nameFirst']!,
-                                      style: TextStyle(
-                                        fontSize: 22.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: isEven ? Colors.black : Colors.blueGrey[600],
-                                      ),
-                                    ),
-                                    Text(
-                                      firstTeam['nameLast']!,
-                                      style: TextStyle(
-                                        fontSize: 22.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: !isEven ? Colors.black : Colors.blueGrey[600],
-                                        height: 0.4,
-                                      ),
-                                    )
-                                  ],
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                              horizontal: 20.w,
+                            ),
+                            height: 60.h,
+                            child: Row(
+                              children: [
+                                Text(
+                                  dayHour,
+                                  style: TextStyle(
+                                      fontSize: 34.sp,
+                                      fontWeight: FontWeight.w600),
                                 ),
-                              ),
-                              SizedBox(width: 30.w),
-                              SizedBox(
-                                height: 60.h,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      secondTeam['nameFirst']!,
-                                      style: TextStyle(
-                                        fontSize: 22.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: !isEven
-                                            ? Colors.black
-                                            : Colors.blueGrey[600],
-                                      ),
-                                    ),
-                                    Text(
-                                      secondTeam['nameLast']!,
-                                      style: TextStyle(
-                                          fontSize: 22.sp,
-                                          fontWeight: FontWeight.w600,
-                                          height: 0.4,
-                                          color: isEven
-                                              ? Colors.black
-                                              : Colors.blueGrey[600]),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'PREMIER LEAGUE',
-                                style: TextStyle(
-                                  fontSize: 22.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.blueGrey[600],
-                                ),
-                              ),
-                            ],
-                          ),
+                                Text(
+                                  ':$daySecond',
+                                  style: TextStyle(
+                                      fontSize: 34.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.blueGrey[600]),
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: EdgeInsets.all(10.r),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 60.h,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    dayDate,
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    dayMonth,
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.blueGrey[600],
+                                        height: 0.4),
+                                  )
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 20.h),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  height: 60.h,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        firstTeam['nameFirst']!,
+                                        style: TextStyle(
+                                          fontSize: 22.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: isEven
+                                              ? Colors.black
+                                              : Colors.blueGrey[600],
+                                        ),
+                                      ),
+                                      Text(
+                                        firstTeam['nameLast']!,
+                                        style: TextStyle(
+                                          fontSize: 22.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: !isEven
+                                              ? Colors.black
+                                              : Colors.blueGrey[600],
+                                          height: 0.4,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(width: 30.w),
+                                SizedBox(
+                                  height: 60.h,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        secondTeam['nameFirst']!,
+                                        style: TextStyle(
+                                          fontSize: 22.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: !isEven
+                                              ? Colors.black
+                                              : Colors.blueGrey[600],
+                                        ),
+                                      ),
+                                      Text(
+                                        secondTeam['nameLast']!,
+                                        style: TextStyle(
+                                            fontSize: 22.sp,
+                                            fontWeight: FontWeight.w600,
+                                            height: 0.4,
+                                            color: isEven
+                                                ? Colors.black
+                                                : Colors.blueGrey[600]),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'PREMIER LEAGUE',
+                                  style: TextStyle(
+                                    fontSize: 22.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.blueGrey[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -469,7 +485,10 @@ class TeamLogoContainer extends StatelessWidget {
               width: width,
               height: height,
               color: clr,
-              child: Image.asset(logo, fit: BoxFit.fitHeight,),
+              child: Image.asset(
+                logo,
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
         )
