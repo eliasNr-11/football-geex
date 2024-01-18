@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:football_geex/views/home_screen.dart';
 
 class MatchDetailPage extends StatelessWidget {
   const MatchDetailPage({super.key});
@@ -12,7 +13,7 @@ class MatchDetailPage extends StatelessWidget {
           Column(
             children: [
               Expanded(
-                flex: 4,
+                flex: 5,
                 child: Container(
                   color: const Color(0xFFFFC7E9),
                 ),
@@ -218,7 +219,7 @@ class MatchDetailPage extends StatelessWidget {
                             40,
                             (index) => Container(
                               margin: EdgeInsets.only(top: 20.h),
-                              height: 32.h,
+                              height: 42.h,
                               width: 1.w,
                               color: Colors.grey[500],
                             ),
@@ -226,23 +227,304 @@ class MatchDetailPage extends StatelessWidget {
                         ),
                         Positioned(
                           bottom: 0,
-                          child: Container(
-                            color: Colors.black,
-                            width: MediaQuery.of(context).size.width / 2.6,
-                            height: 60.h,
+                          child: ClipPath(
+                            clipper: CustomPentagonCard(
+                              cornerRadius: 0.r,
+                              distanceToXAxis: 14.w,
+                              distanceToYAxis: 10.h,
+                              isCurved: false,
+                            ),
+                            child: Container(
+                              color: Colors.black,
+                              width: MediaQuery.of(context).size.width / 2.6,
+                              height: 60.h,
+                            ),
                           ),
                         ),
                         Positioned(
                           bottom: 0,
-                          child: Container(
-                            color: Colors.black26,
-                            width: MediaQuery.of(context).size.width / 1.74,
-                            height: 40.h,
+                          child: ClipPath(
+                            clipper: CustomPentagonCard(
+                              cornerRadius: 0.r,
+                              distanceToXAxis: 10.w,
+                              distanceToYAxis: 8.h,
+                              isCurved: false,
+                            ),
+                            child: Container(
+                              color: Colors.black26,
+                              width: MediaQuery.of(context).size.width / 1.74,
+                              height: 50.h,
+                            ),
                           ),
                         )
                       ],
                     ),
-                  )
+                  ),
+                  SizedBox(height: 10.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            '31%',
+                            style: TextStyle(
+                              fontSize: 36.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'MNCH',
+                            style: TextStyle(
+                                fontSize: 26.sp,
+                                // fontWeight: FontWeight.w600,
+                                color: Colors.grey[600],
+                                height: 0.1),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '22%',
+                            style: TextStyle(
+                              fontSize: 36.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'DRAW',
+                            style: TextStyle(
+                                fontSize: 26.sp,
+                                // fontWeight: FontWeight.w600,
+                                color: Colors.grey[600],
+                                height: 0.1),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '47%',
+                            style: TextStyle(
+                              fontSize: 36.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          Text(
+                            'CHE',
+                            style: TextStyle(
+                                fontSize: 26.sp,
+                                // fontWeight: FontWeight.w600,
+                                color: Colors.grey[600],
+                                height: 0.1),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 24.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 5.w),
+                    child: Stack(
+                      children: [
+                        ClipPath(
+                          clipper: CustomTriangleCard(),
+                          child: Container(
+                            height: 205.h,
+                            color: Colors.white.withOpacity(0.4),
+                          ),
+                        ),
+                        Positioned.fill(
+                          top: 0,
+                          left: 0,
+                          child: ClipPath(
+                            clipper: CustomPentagonCard(
+                              cornerRadius: 20.r,
+                              distanceToXAxis: 60.w,
+                              distanceToYAxis: 56.h,
+                              bezeirYOne: 44.h,
+                              bezeirYTwo: 30.h,
+                              isCurved: true,
+                            ),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(10.r),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/premier_league.png',
+                                          height: 40.h,
+                                          width: 30.w,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Text(
+                                          '08 SEP',
+                                          style: TextStyle(
+                                              fontSize: 24.sp,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: -1,
+                                              color: Colors.grey[400]),
+                                        ),
+                                        SizedBox(width: 30.w),
+                                      ],
+                                    ),
+                                    SizedBox(height: 14.h),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TeamLogoContainer(
+                                          pentCard: CustomPentagonCard(
+                                            cornerRadius: 10.r,
+                                            distanceToXAxis: 18.w,
+                                            distanceToYAxis: 16.h,
+                                            isCurved: false,
+                                          ),
+                                          clr: Colors.white,
+                                          logo:
+                                              'assets/images/manchester_united.png',
+                                          height: 56.h,
+                                          width: 56.w,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              '09',
+                                              style: TextStyle(
+                                                  fontSize: 72.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: -1,
+                                                  height: 0.1),
+                                            ),
+                                            Text(
+                                              ':30',
+                                              style: TextStyle(
+                                                fontSize: 72.sp,
+                                                fontWeight: FontWeight.bold,
+                                                letterSpacing: -2,
+                                                height: 0.1,
+                                                color: Colors.grey[400],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        TeamLogoContainer(
+                                          pentCard: CustomPentagonCard(
+                                            cornerRadius: 10.r,
+                                            distanceToXAxis: 18.w,
+                                            distanceToYAxis: 16.h,
+                                            isCurved: false,
+                                          ),
+                                          clr: Colors.white,
+                                          logo: 'assets/images/chelsea.png',
+                                          height: 56.h,
+                                          width: 56.w,
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(
+                                      height: 26.h,
+                                      thickness: 0.5.h,
+                                    ),
+                                    SizedBox(height: 10.h),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'MANCHESTER',
+                                                style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: -1,
+                                                  height: 0.1,
+                                                ),
+                                              ),
+                                              Text(
+                                                'UNITED',
+                                                style: TextStyle(
+                                                    fontSize: 24.sp,
+                                                    fontWeight: FontWeight.bold,
+                                                    letterSpacing: -1,
+                                                    color: Colors.grey[400]),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            'PREMIER LEAGUE',
+                                            style: TextStyle(
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.bold,
+                                              letterSpacing: -1,
+                                              color: Colors.grey[400],
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'F.C.',
+                                                style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: -1,
+                                                  height: 0.1,
+                                                  color: Colors.grey[400],
+                                                ),
+                                              ),
+                                              Text(
+                                                'CHELSEA',
+                                                style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  letterSpacing: -1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Text(
+                    'CHOOSE THE WINNER',
+                    style: TextStyle(
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: -1,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ],
               ),
             ),
