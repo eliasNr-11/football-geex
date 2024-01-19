@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_screenutil: 5.8.4
+  go_router: ^11.1.1
 
 dev_dependencies:
   flutter_test:
@@ -17,3 +19,19 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+  
+  fonts:
+    - family: Teko
+      fonts:
+        - asset: assets/fonts/Teko/Teko-Regular.ttf
+        - asset: assets/fonts/Teko/Teko-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Teko/Teko-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Teko/Teko-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Teko/Teko-Bold.ttf
+          weight: 700
