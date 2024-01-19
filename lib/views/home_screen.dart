@@ -256,6 +256,8 @@ class MatchesCard extends StatelessWidget {
                   bezeirYOne: 44.h,
                   bezeirYTwo: 30.h,
                   isCurved: true,
+                  isMatchDetail: false,
+                  isProgress: false,
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -276,6 +278,8 @@ class MatchesCard extends StatelessWidget {
                                     distanceToXAxis: 18.w,
                                     distanceToYAxis: 16.h,
                                     isCurved: false,
+                                    isMatchDetail: false,
+                                    isProgress: false,
                                   ),
                                   clr: clr,
                                   logo: firstTeam['logo']!,
@@ -289,6 +293,8 @@ class MatchesCard extends StatelessWidget {
                                     distanceToXAxis: 18.w,
                                     distanceToYAxis: 16.h,
                                     isCurved: false,
+                                    isMatchDetail: false,
+                                    isProgress: false,
                                   ),
                                   clr: clr,
                                   logo: secondTeam['logo']!,
@@ -504,6 +510,8 @@ class CustomPentagonCard extends CustomClipper<Path> {
   double? bezeirYOne;
   double? bezeirYTwo;
   final bool isCurved;
+  final bool isMatchDetail;
+  final bool isProgress;
 
   CustomPentagonCard({
     super.reclip,
@@ -513,6 +521,8 @@ class CustomPentagonCard extends CustomClipper<Path> {
     this.bezeirYOne,
     this.bezeirYTwo,
     required this.isCurved,
+    required this.isMatchDetail,
+    required this.isProgress,
   });
   @override
   getClip(Size size) {
@@ -525,13 +535,17 @@ class CustomPentagonCard extends CustomClipper<Path> {
     //BottomLeft
     path.quadraticBezierTo(0, size.height, cornerRadius, size.height);
 
-    path.lineTo(size.width - cornerRadius, size.height);
+    if (!isProgress) {
+      path.lineTo(size.width - cornerRadius, size.height);
 
-    //BottomRight
-    path.quadraticBezierTo(
-        size.width, size.height, size.width, size.height - cornerRadius);
+      //BottomRight
+      path.quadraticBezierTo(
+          size.width, size.height, size.width, size.height - cornerRadius);
 
-    path.lineTo(size.width, cornerRadius);
+      path.lineTo(size.width, cornerRadius);
+    } else {
+      path.lineTo(size.width, size.height);
+    }
 
     path.lineTo(size.width, distanceToYAxis);
     if (isCurved) {
@@ -539,6 +553,12 @@ class CustomPentagonCard extends CustomClipper<Path> {
           size.width, bezeirYOne!, size.width - cornerRadius, bezeirYTwo!);
     }
     path.lineTo(size.width - distanceToXAxis, 0);
+    if (isMatchDetail) {
+      path.lineTo(size.width / 2 + 28, 0);
+      path.lineTo(size.width / 2 + 22, 8);
+      path.lineTo(size.width / 2 - 22, 8);
+      path.lineTo(size.width / 2 - 28, 0);
+    }
     path.lineTo(cornerRadius, 0);
 
     //TopLeft

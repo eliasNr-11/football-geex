@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:football_geex/views/home_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class MatchDetailPage extends StatelessWidget {
   const MatchDetailPage({super.key});
@@ -35,11 +36,22 @@ class MatchDetailPage extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Image.asset(
-                          'assets/images/premier_league.png',
-                          height: 50.h,
-                          width: 40.w,
-                          fit: BoxFit.cover,
+                        Expanded(
+                          flex: 1,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              padding: EdgeInsets.all(8.r),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.black.withOpacity(0.1),
+                              ),
+                              child: Icon(
+                                Icons.sports_soccer,
+                                size: 28.sp,
+                              ),
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 2,
@@ -65,14 +77,20 @@ class MatchDetailPage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          width: 40.w,
+                        Expanded(
+                          flex: 1,
                           child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Icon(
+                            alignment: Alignment.centerRight,
+                            child: IconButton(
+                              onPressed: () {
+                                context.pop();
+                              },
+                              icon: Icon(
                                 Icons.keyboard_arrow_down,
-                                size: 32.sp,
-                              )),
+                                size: 34.sp,
+                              ),
+                            ),
+                          ),
                         )
                       ],
                     ),
@@ -133,7 +151,7 @@ class MatchDetailPage extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 24.sp,
                               fontWeight: FontWeight.w600,
-                              color: Colors.grey[500],
+                              color: Colors.grey[600],
                             ),
                           ),
                         ),
@@ -229,10 +247,12 @@ class MatchDetailPage extends StatelessWidget {
                           bottom: 0,
                           child: ClipPath(
                             clipper: CustomPentagonCard(
-                              cornerRadius: 0.r,
+                              cornerRadius: 14.r,
                               distanceToXAxis: 14.w,
                               distanceToYAxis: 10.h,
                               isCurved: false,
+                              isMatchDetail: false,
+                              isProgress: true,
                             ),
                             child: Container(
                               color: Colors.black,
@@ -245,10 +265,12 @@ class MatchDetailPage extends StatelessWidget {
                           bottom: 0,
                           child: ClipPath(
                             clipper: CustomPentagonCard(
-                              cornerRadius: 0.r,
+                              cornerRadius: 14.r,
                               distanceToXAxis: 10.w,
                               distanceToYAxis: 8.h,
                               isCurved: false,
+                              isMatchDetail: false,
+                              isProgress: true,
                             ),
                             child: Container(
                               color: Colors.black26,
@@ -346,6 +368,8 @@ class MatchDetailPage extends StatelessWidget {
                               bezeirYOne: 44.h,
                               bezeirYTwo: 30.h,
                               isCurved: true,
+                              isMatchDetail: true,
+                              isProgress: false,
                             ),
                             child: Container(
                               decoration: const BoxDecoration(
@@ -369,7 +393,7 @@ class MatchDetailPage extends StatelessWidget {
                                           '08 SEP',
                                           style: TextStyle(
                                               fontSize: 24.sp,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w600,
                                               letterSpacing: -1,
                                               color: Colors.grey[400]),
                                         ),
@@ -387,6 +411,8 @@ class MatchDetailPage extends StatelessWidget {
                                             distanceToXAxis: 18.w,
                                             distanceToYAxis: 16.h,
                                             isCurved: false,
+                                            isMatchDetail: false,
+                                            isProgress: false,
                                           ),
                                           clr: Colors.white,
                                           logo:
@@ -422,6 +448,8 @@ class MatchDetailPage extends StatelessWidget {
                                             distanceToXAxis: 18.w,
                                             distanceToYAxis: 16.h,
                                             isCurved: false,
+                                            isMatchDetail: false,
+                                            isProgress: false,
                                           ),
                                           clr: Colors.white,
                                           logo: 'assets/images/chelsea.png',
