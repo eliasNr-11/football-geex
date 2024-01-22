@@ -345,7 +345,7 @@ class MatchDetailPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 20.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 5.w),
                     child: Stack(
@@ -353,7 +353,7 @@ class MatchDetailPage extends StatelessWidget {
                         ClipPath(
                           clipper: CustomTriangleCard(),
                           child: Container(
-                            height: 205.h,
+                            height: 210.h,
                             color: Colors.white.withOpacity(0.4),
                           ),
                         ),
@@ -543,7 +543,7 @@ class MatchDetailPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 24.h),
+                  SizedBox(height: 20.h),
                   Text(
                     'CHOOSE THE WINNER',
                     style: TextStyle(
